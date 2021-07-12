@@ -76,11 +76,62 @@ def precip_probability_four_hours(precip_prob):
         description = descriptors[2]
     return perc_rain_any, description
 
-def what_should_i_wear(season, realTemp, realhighTemp, reallowTemp, humidity):
-    """Analyzes current conditions and daily forecast and returns a recommendation on what to wear."""
-    #todo
+def recommend_outfit(season, realTemp, realhighTemp, reallowTemp, uvindex, windChill):
+    """Analyzes current conditions and daily forecast and returns a dictionary of recommendations on what to wear and accessories."""
+    # Fit Recommendation based on Real Feel temperatures
+    if realTemp >= 80:
+        top = 'Crop top'
+        bottom = 'Shorts'
+        if reallowTemp < 70:
+        #todo
+        mantra = 'Hot girl summer. Aye.'
+    elif realTemp >= 72:
+        top = 'Short sleeves'
+        bottom = 'Shorts or skirt'
+        if reallowTemp <= 72:
+            top = 'Short sleeves but bring a cardi for night.'
+            bottom = 'Ripped jeans or linen pants.'
+        mantra = 'California dreamin~'
+    elif realTemp >= 65:
+        top = 'Light jumper'
+        bottom = 'Denim or trousers'
+        if reallowTemp < 65 and reallowTemp > 60:
+            top = 'Layer up. Jumper and a light jacket.'
+            bottom = 'Trousers and socks.'
+        mantra = 'Fall is the best time of all.'
+    # todo - finish ranges
+    elif realTemp >= 55:
+        pass
+    elif realTemp >= 45:
+        pass
+    elif realTemp >= 40:
+        pass
+    elif realTemp < 40:
+        if reallowTemp < 30:
+        #todo : extreme winter
+        pass
 
-    pass
+    # UV Index
+    if uvindex > 5 and uvindex < 8:
+        accessory = 'Bring your sunnies.'
+    elif uvindex > 8:
+        accessory = 'BIG sun energy. Sunnies and sunscreen.'
+
+    fit_rec = {"top": top, "bottom": bottom, "accessory": accessory, "mantra": mantra}
+    return fit_rec
+
+def recommend_hair(humidity):
+    """Checks humidity and recommends manageability for hair. Returns None if low humidity."""
+    if humidity <= 20:
+        hair_rec = None
+    elif humidity >= 60:
+        hair_rec = 'Frizz city girl. Tie it up."
+    elif humidity >= 50:
+        hair_rec = 'Hairspray all day.'
+    else:
+        hair_rec = 'Minimal frizz risk.'
+    return hair_rec
+
 
 def get_season():
     """Returns the season based on today's date."""
